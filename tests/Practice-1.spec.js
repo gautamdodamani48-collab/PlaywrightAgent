@@ -1,6 +1,6 @@
 const {test,expect}=require('@playwright/test');
 
-test.only('Practice-1',async({page})=>{
+test('Practice-1',async({page})=>{
 await page.goto('https://www.saucedemo.com');
 
 await page.locator("#user-name").fill("standard_user");
