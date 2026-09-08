@@ -1,4 +1,8 @@
-const {test,expect}=require('@playwright/test');
+const {test,expect,request}=require('@playwright/test');
+
+
+
+
 
 test('Practice-1',async({page})=>{
 await page.goto('https://www.saucedemo.com');
