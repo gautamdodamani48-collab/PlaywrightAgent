@@ -33,6 +33,24 @@ test('add to cart', async () => {
         const product=await products.nth(i);
         await product.locator('a.add-to-cart').first().click();
         await page.getByRole('button', { name: 'Continue Shopping' }).click();
-    }      
+    }  
+    await page.getByText(' Cart').first().click();
+    await page.locator('#cart_info_table').waitFor();
+    const cartdelete=await page.locator('.cart_delete');    
+    while(await cartdelete.count()>1){
+        await cartdelete.nth(0).click();
+    }
+    await page.pause();
 });
+
+test.only('place order', async () => {
+    const page = await webContext.newPage();
+    await page.goto('https://automationexercise.com/');
+    await page.locator('.features_items').filter({ hasText: 'Men Tshirt' }).locator('a.add-to-cart').first().click();
+await page.getByRole('button', { name: 'Continue Shopping' }).click();
+await page.getByText(' Cart').first().click();
+await page.getByText('Proceed To Checkout').click();
+}
+);
+
 
