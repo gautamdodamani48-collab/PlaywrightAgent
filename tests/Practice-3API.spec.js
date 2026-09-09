@@ -53,4 +53,27 @@ await page.getByText('Proceed To Checkout').click();
 }
 );
 
+test('route to cart', async () => {
+    const page = await webContext.newPage();
+    await page.goto('https://automationexercise.com/');
+    await page.route('https://automationexercise.com/view_cart', async route => {
+        const response = await route.fetch();
+        let html = await response.text();
+
+        const emptyCartMessage = `
+            <span id="empty_cart" style="display: block;">
+                <br>`;
+
+                html = html.replace(/<span id="empty_cart" style="display: none;">[\s\S]*?<\/span>/, emptyCartMessage);
+
+                await route.fulfill({
+                    response: response,
+                    body: html,
+                });
+    });
+
+   
+ await page.goto('https://automationexercise.com/view_cart');
+ await expect(page.locator('#empty_cart')).toBeVisible();
+});
 
