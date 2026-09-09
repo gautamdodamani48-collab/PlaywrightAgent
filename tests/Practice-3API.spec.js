@@ -43,7 +43,7 @@ test('add to cart', async () => {
     await page.pause();
 });
 
-test.only('place order', async () => {
+test('place order', async () => {
     const page = await webContext.newPage();
     await page.goto('https://automationexercise.com/');
     await page.locator('.features_items').filter({ hasText: 'Men Tshirt' }).locator('a.add-to-cart').first().click();
