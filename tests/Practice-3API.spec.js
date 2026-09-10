@@ -26,6 +26,8 @@ test('login', async () => {
 test('add to cart', async () => {
     const page = await webContext.newPage();
     await page.goto('https://automationexercise.com/');
+    page.on('request', request => {console.log(request.url())});
+    page.on('response', response => {console.log(response.url(), response.status())});
     const products =  page.locator('.features_items .single-products');
     
     const productCount = await products.count();
